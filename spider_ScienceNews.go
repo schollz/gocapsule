@@ -32,9 +32,15 @@ func (p *ScienceNewsGroup) Get(bucketName string) error {
 	err := db.View(func(tx *bolt.Tx) error {
 		var err error
 		b := tx.Bucket([]byte(bucketName))
+		if b == nil {
+			return nil
+		}
 		k := []byte("ScienceNewsGroup")
-		err = p.decode(b.Get(k))
-		fmt.Println(p)
+		val := b.Get(k)
+		if val == nil {
+			return nil
+		}
+		err = p.decode(val)
 		if err != nil {
 			return err
 		}

@@ -9,6 +9,8 @@ import (
 )
 
 func main() {
+	// Initialize all buckets
+
 	Open()
 	defer Close()
 
@@ -21,8 +23,9 @@ func main() {
 	// fmt.Println(p)
 
 	var p ScienceNewsGroup
-	err := p.Get(time.Now().String()[0:10])
-	fmt.Println(p, err)
+	err := p.Get(time.Now().String()[0:11])
+	fmt.Println(p, err, len(p.Data))
+	// check size of p.Data, if 0 then don't use
 
 	// Create a new scheduler
 	scheduler := spider.NewScheduler()
