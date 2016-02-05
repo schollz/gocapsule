@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"log"
 	"path"
@@ -31,71 +30,6 @@ func Open() error {
 func Close() {
 	open = false
 	db.Close()
-}
-
-type Person struct {
-	ID   string
-	Name string
-	Age  string
-	Job  string
-}
-
-func (p *Person) save() error {
-	if !open {
-		return fmt.Errorf("db must be opened before saving!")
-	}
-	err := db.Update(func(tx *bolt.Tx) error {
-		people, err := tx.CreateBucketIfNotExists([]byte("people"))
-		if err != nil {
-			return fmt.Errorf("create bucket: %s", err)
-		}
-		enc, err := p.encode()
-		if err != nil {
-			return fmt.Errorf("could not encode Person %s: %s", p.ID, err)
-		}
-		err = people.Put([]byte(p.ID), enc)
-		return err
-	})
-	return err
-}
-
-func (p *Person) encode() ([]byte, error) {
-	enc, err := json.Marshal(p)
-	if err != nil {
-		return nil, err
-	}
-	return enc, nil
-}
-
-func decode(data []byte) (*Person, error) {
-	var p *Person
-	err := json.Unmarshal(data, &p)
-	if err != nil {
-		return nil, err
-	}
-	return p, nil
-}
-
-func GetPerson(id string) (*Person, error) {
-	if !open {
-		return nil, fmt.Errorf("db must be opened before saving!")
-	}
-	var p *Person
-	err := db.View(func(tx *bolt.Tx) error {
-		var err error
-		b := tx.Bucket([]byte("people"))
-		k := []byte(id)
-		p, err = decode(b.Get(k))
-		if err != nil {
-			return err
-		}
-		return nil
-	})
-	if err != nil {
-		fmt.Printf("Could not get Person ID %s", id)
-		return nil, err
-	}
-	return p, nil
 }
 
 func List(bucket string) {
