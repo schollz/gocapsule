@@ -110,7 +110,8 @@ func init() {
 		htmlparser.Find(`div[class="media__body"]`).Each(func(i int, s *goquery.Selection) {
 			title := strings.TrimSpace(s.Find("h2").Text())
 			url, _ := s.Find("h2 > a").Attr("href")
-			summary := "summary"
+			url = "http://www.sciencemag.org" + url
+			summary := "None"
 			fmt.Printf("%d: %s (%s) - %s\n", i, title, url, summary)
 			p.Data = append(p.Data, ScienceNews{title, summary, url})
 		})
