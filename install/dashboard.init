@@ -9,7 +9,7 @@ dir="/home/phi/Documents/gocapsule"
 user="phi"
 cmd="./gocapsule zdashboard.duckdns.org"
 
-name="dashboard"
+name="gocapsule"
 pid_file="/var/run/$name.pid"
 stdout_log="/var/log/$name.log"
 stderr_log="/var/log/$name.err"
