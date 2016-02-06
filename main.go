@@ -21,7 +21,7 @@ func main() {
 	ExternalIP = os.Args[1]
 	loadSelfSpider()
 	scheduler := spider.NewScheduler()
-	scheduler.Add(schedule.Every(600*time.Second), ScienceNewsSpider)
+	// scheduler.Add(schedule.Every(600*time.Second), ScienceNewsSpider)
 	scheduler.Add(schedule.Every(600*time.Second), InTheatersSpider)
 	scheduler.Add(schedule.Every(600*time.Second), GroceriesSpider)
 	scheduler.Add(schedule.Every(600*time.Second), CoolListSpider)
@@ -69,7 +69,6 @@ func main() {
 
 			c.HTML(http.StatusOK, "index.tmpl", gin.H{
 				"Date":        day,
-				"ScienceNews": scienceNews.Data,
 				"InTheaters":  inTheaters.Data,
 				"GroceryList": groceryList.Data,
 				"CoolList":    coolList.Data,
