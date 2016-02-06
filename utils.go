@@ -6,6 +6,7 @@ import (
 	"log"
 	"path"
 	"runtime"
+	"strings"
 	"time"
 
 	"github.com/boltdb/bolt"
@@ -14,6 +15,9 @@ import (
 var db *bolt.DB
 var open bool
 
+func Today() string {
+	return strings.Replace(time.Now().String()[0:10], "-", "/", -1)
+}
 func Open() error {
 	var err error
 	_, filename, _, _ := runtime.Caller(0) // get full path of this file

@@ -590,7 +590,7 @@ there.
     <!-- columns should be the immediate child of a .row -->
     <div class="row">
       <div class="twelve columns">
-        <center>February 5, 2016</center>
+        <center>{{ .Date }}</center>
       </div>
       <div class="twelve columns">
         &nbsp;
@@ -620,15 +620,12 @@ there.
 
       <div class="three columns">
         <div class="twelve columns">
-          <h3><a href="http://cowyo.com/grocerylist">G-list http://cowyo.com/grocerylist</a></h3></div>
+          <h3><a href="http://cowyo.com/grocerylist">G-list</a></h3></div>
         <div class="twelve columns">
           <ul>
-            <li>Item 1</li>
-            <li>Item 3</li>
-            <li>Item 3</li>
-            <li>Item 3</li>
-            <li>Item 3</li>
-            <li>Item 3</li>
+            {{ range .Groceries }}
+            <li>&nbsp; {{ .Name }}</li>
+            {{ end }}
           </ul>
         </div>
       </div>
@@ -639,15 +636,13 @@ there.
         </div>
         <div class="twelve columns">
           <ul>
-            <li>Item 1</li>
-            <li>
-              <a href="#">Cras tempus, nunc vitae convallis lobortis, neque dolor tempor velit, sed tincidunt sapien ipsum quis nibh. <small>Donec convallis.</small></a>
-            </li>
-            <li>Item 3</li>
+            {{ range .InTheaters }}
+            <li>&nbsp; <a href="{{ .Url }}">{{ .Title }}</a><small>&nbsp;{{ .Score }}</small></li>
+            {{ end }}
+
           </ul>
         </div>
       </div>
-
 
     </div>
 
