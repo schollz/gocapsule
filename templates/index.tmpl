@@ -615,21 +615,56 @@ there.
         </div>
       </div>
 
-      <div class="three columns">
+
+      <div class="five columns">
         <div class="twelve columns">
-          <h3><a href="http://cowyo.com/grocerylist">G-list</a></h3></div>
+          <h3><a href="http://cowyo.com/todo">T-list</a></h3></div>
         <div class="twelve columns">
           <ul>
-            {{ range .Groceries }}
+            {{ range .TodoList }}
             <li>&nbsp; {{ .Name }}</li>
             {{ end }}
           </ul>
         </div>
       </div>
 
-      <div class="six columns">
+      <div class="four columns">
         <div class="twelve columns">
-          <h3>Theatrical Showings</h3>
+          <h3><a href="http://cowyo.com/cool">C-list</a></h3></div>
+        <div class="twelve columns">
+          <ul>
+            {{ range .CoolList }}
+            <li>&nbsp; {{ .Name }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+    <div class="row">
+        <div class="three columns">
+          &nbsp;
+        </div>
+      <div class="five columns">
+        <div class="twelve columns">
+          <h3>G-list</h3>
+        </div>
+        <div class="twelve columns">
+          <ul>
+            {{ range .GroceryList }}
+            <li>&nbsp; {{ .Name }}</li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+
+      <div class="four columns">
+        <div class="twelve columns">
+          <h3>Theatrics</h3>
         </div>
         <div class="twelve columns">
           <ul>
@@ -640,7 +675,6 @@ there.
           </ul>
         </div>
       </div>
-
     </div>
 
     <hr>

@@ -86,27 +86,28 @@ func (p *SelfData) decode(data []byte) error {
 
 var SelfSpider spider.Spider
 
-func init() {
-	SelfSpider = spider.Get("http://localhost:8080/", func(ctx *spider.Context) error {
+func loadSelfSpider() {
+	SelfSpider = spider.Get("http://"+ExternalIP+"/", func(ctx *spider.Context) error {
 
-		fmt.Println(time.Now())
+		fmt.Print(time.Now())
+		fmt.Println("SelfSpider")
 		if _, err := ctx.DoRequest(); err != nil {
+			fmt.Println(err)
 			return err
 		}
 
 		htmlparser, err := ctx.HTMLParser()
 		if err != nil {
+			fmt.Println(err)
 			return err
 		}
 		html, _ := htmlparser.Html()
 		p := SelfData{html, time.Now().String()}
 
-		Open()
 		err = p.save()
 		if err != nil {
 			return fmt.Errorf("error saving SelfData")
 		}
-		Close()
 
 		return nil
 	})
