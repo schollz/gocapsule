@@ -92,7 +92,9 @@ var WeatherSpider spider.Spider
 
 func init() {
 	WeatherSpider = spider.Get("http://forecast.weather.gov/MapClick.php?lat=35.9804&lon=-78.915&lg=english&&FcstType=digital", func(ctx *spider.Context) error {
-		fmt.Println(time.Now())
+		fmt.Print(time.Now())
+		fmt.Println("WeatherSpider")
+
 		if _, err := ctx.DoRequest(); err != nil {
 			return err
 		}
@@ -148,10 +150,10 @@ func init() {
 		})
 		Open()
 		err = p.save()
+		Close()
 		if err != nil {
 			return fmt.Errorf("error saving WeatherData")
 		}
-		Close()
 		return nil
 	})
 }

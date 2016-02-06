@@ -92,7 +92,8 @@ var GroceriesSpider spider.Spider
 
 func init() {
 	GroceriesSpider = spider.Get("http://cowyo.com/grocerylist", func(ctx *spider.Context) error {
-		fmt.Println(time.Now())
+		fmt.Print(time.Now())
+		fmt.Println("GroceriesSpider")
 		Open()
 		defer Close()
 

@@ -97,9 +97,8 @@ var InTheatersSpider spider.Spider
 
 func init() {
 	InTheatersSpider = spider.Get("http://www.metacritic.com/browse/movies/release-date/theaters/date", func(ctx *spider.Context) error {
-		fmt.Println(time.Now())
-		Open()
-		defer Close()
+		fmt.Print(time.Now())
+		fmt.Println("InTheatersSpider")
 
 		if _, err := ctx.DoRequest(); err != nil {
 			return err
@@ -122,11 +121,13 @@ func init() {
 			if (strings.Contains(date, curMonth) || strings.Contains(date, lastMonth)) && score > 60 {
 				urlComponent := strings.Join(strings.Split("showtimes "+title, " "), "+")
 				url := "https://www.google.com/?q=" + urlComponent + "#safe=active&q=" + urlComponent
-				fmt.Printf("%d: %s %d %s %s\n", i, title, score, date, url)
+				// fmt.Printf("%d: %s %d %s %s\n", i, title, score, date, url)
 				p.Data = append(p.Data, Movie{title, date, score, url})
 			}
 		})
+		Open()
 		err = p.save()
+		Close()
 		if err != nil {
 			return fmt.Errorf("error saving InTheatersGroup")
 		}

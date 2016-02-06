@@ -18,13 +18,15 @@ var open bool
 func Today() string {
 	return strings.Replace(time.Now().String()[0:10], "-", "/", -1)
 }
+
 func Open() error {
 	var err error
 	_, filename, _, _ := runtime.Caller(0) // get full path of this file
 	dbfile := path.Join(path.Dir(filename), "data.db")
-	config := &bolt.Options{Timeout: 1 * time.Second}
+	config := &bolt.Options{Timeout: 30 * time.Second}
 	db, err = bolt.Open(dbfile, 0600, config)
 	if err != nil {
+		fmt.Println("Opening BoltDB timed out")
 		log.Fatal(err)
 	}
 	open = true

@@ -12,11 +12,11 @@ import (
 
 func main() {
 	scheduler := spider.NewScheduler()
-	// scheduler.Add(schedule.Every(10*time.Second), ScienceNewsSpider)
-	// scheduler.Add(schedule.Every(10*time.Second), InTheatersSpider)
-	// scheduler.Add(schedule.Every(2*time.Second), GroceriesSpider)
+	scheduler.Add(schedule.Every(10*time.Second), ScienceNewsSpider)
+	scheduler.Add(schedule.Every(10*time.Second), InTheatersSpider)
+	scheduler.Add(schedule.Every(10*time.Second), GroceriesSpider)
 	// scheduler.Add(schedule.Every(6*time.Second), SelfSpider)
-	scheduler.Add(schedule.Every(20*time.Second), WeatherSpider)
+	scheduler.Add(schedule.Every(10*time.Second), WeatherSpider)
 	scheduler.Start()
 
 	// Testing

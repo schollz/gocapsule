@@ -95,9 +95,9 @@ var ScienceNewsSpider spider.Spider
 
 func init() {
 	ScienceNewsSpider = spider.Get("http://www.sciencemag.org/news", func(ctx *spider.Context) error {
-		Open()
-		defer Close()
-		fmt.Println(time.Now())
+		fmt.Print(time.Now())
+		fmt.Println("ScienceNewsSpider")
+
 		if _, err := ctx.DoRequest(); err != nil {
 			return err
 		}
@@ -115,7 +115,9 @@ func init() {
 			summary := "None"
 			p.Data = append(p.Data, ScienceNews{title, summary, url})
 		})
+		Open()
 		err = p.save()
+		Close()
 		if err != nil {
 			return fmt.Errorf("error saving ScienceNewsGroup")
 		}
