@@ -603,18 +603,15 @@ there.
 
       <div class="three columns">
         <div class="twelve columns">
-          <h3><a href="http://cowyo.com/grocerylist">Weather</a></h3></div>
+          <h3><a href="http://forecast.weather.gov/MapClick.php?lat=35.9804&lon=-78.915&unit=0&lg=english&FcstType=graphical">Weather</a></h3></div>
         <div class="twelve columns">
-          <span style="font-size:110%">Now: &nbsp;</span><span style="font-size:300%">45</span><span style="font-size:90%">&nbsp;No rain.</span>
+          <span style="font-size:110%">Hi: &nbsp;</span><span style="font-size:300%">{{ .Weather.High }}</span><span style="font-size:160%">&nbsp;&#176;F</span>
         </div>
         <div class="twelve columns">
-          <span style="font-size:110%">Later: &nbsp;</span><span style="font-size:300%">45</span><span style="font-size:90%">&nbsp;No rain.</span>
+          <span style="font-size:110%">Lo: &nbsp;</span><span style="font-size:300%">{{ .Weather.Low }}</span><span style="font-size:160%">&nbsp;&#176;F</span>
         </div>
         <div class="twelve columns">
-          <span style="font-size:110%">Tom.: &nbsp;</span><span style="font-size:300%">45</span><span style="font-size:90%">&nbsp;No rain.</span>
-        </div>
-        <div class="twelve columns">
-          <p>http://forecast.weather.gov/MapClick.php?lat=35.9804&lon=-78.915&lg=english&&FcstType=digital</p>
+          <span style="font-size:110%">Rain: &nbsp;</span><span style="font-size:300%">{{ .Weather.Rain }}</span><span style="font-size:160%">&nbsp;in.</span>
         </div>
       </div>
 
@@ -668,6 +665,7 @@ there.
       </div>
 
     </div>
+    <hr>
 
     <div class="row">
 
@@ -688,6 +686,7 @@ there.
 
     </div>
 
+    <hr>
 
     <div class="row">
 
