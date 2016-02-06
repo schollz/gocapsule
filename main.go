@@ -19,25 +19,28 @@ func main() {
 	scheduler.Add(schedule.Every(10*time.Second), WeatherSpider)
 	scheduler.Start()
 
-	// Testing
 	Open()
-	var p WeatherData
-	p.Get(Today())
-	fmt.Println(p)
-	Close()
+	defer Close()
+
+	// Testing
+	// Open()
+	// var p WeatherData
+	// p.Get(Today())
+	// fmt.Println(p)
+	// Close()
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
 	router.GET("/", func(c *gin.Context) {
 		day := Today()
-		c.Redirect(http.StatusMovedPermanently, "http://localhost:8001/"+day)
+		c.Redirect(http.StatusMovedPermanently, "/"+day)
 	})
 	router.GET("/:year/:month/:day", func(c *gin.Context) {
 		year := c.Param("year")
 		month := c.Param("month")
 		daynum := c.Param("day")
 		day := year + "/" + month + "/" + daynum
-		Open()
+		// Open()
 		var scienceNews ScienceNewsGroup
 		scienceNews.Get(day)
 		var inTheaters InTheatersGroup
@@ -46,7 +49,7 @@ func main() {
 		groceryList.Get(day)
 		var weather WeatherData
 		weather.Get(day)
-		Close()
+		// Close()
 
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
 			"Date":        day,

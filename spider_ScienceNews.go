@@ -115,9 +115,9 @@ func init() {
 			summary := "None"
 			p.Data = append(p.Data, ScienceNews{title, summary, url})
 		})
-		Open()
+		// Open()
 		err = p.save()
-		Close()
+		// Close()
 		if err != nil {
 			return fmt.Errorf("error saving ScienceNewsGroup")
 		}

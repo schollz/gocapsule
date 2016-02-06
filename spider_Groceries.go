@@ -94,8 +94,6 @@ func init() {
 	GroceriesSpider = spider.Get("http://cowyo.com/grocerylist", func(ctx *spider.Context) error {
 		fmt.Print(time.Now())
 		fmt.Println("GroceriesSpider")
-		Open()
-		defer Close()
 
 		if _, err := ctx.DoRequest(); err != nil {
 			return err
@@ -113,7 +111,9 @@ func init() {
 				p.Data = append(p.Data, GroceryItem{dat})
 			}
 		}
+		// Open()
 		err = p.save()
+		// Close()
 		if err != nil {
 			return fmt.Errorf("error saving GroceryListGroup")
 		}
